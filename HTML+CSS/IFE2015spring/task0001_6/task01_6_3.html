@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <title>polandeme</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    div{
+      height: 300px;
+      
+    }
+    #left{
+      float: left;
+      width: 200px;
+      background-color: red;
+    }
+    #right{
+      position: relative;
+      left: 200px;
+      background-color: blue;
+      color: greenyellow;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="left">
+  </div>
+  <div id="right">
+    只让left脱离文档流，然后设置right左外边距为200，或者right设置为relative定位，left属性200.
+  </div>
+</body>
+
+</html>
