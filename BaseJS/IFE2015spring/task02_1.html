@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>task0002</title>
+</head>
+
+<body>
+  <input id="number1" type="text">
+  <input id="number2" type="text">
+  <span id="result"></span>
+  <button id="addbtn"></button>
+  <script type="text/javascript">
+    //创建id选择器查询
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function add(num1, num2) {
+      return num1 + num2;
+    }
+
+    //渲染result
+    function renderResult(result) {
+      $('result').innerHTML = result;
+    }
+
+    //运算事件响应函数
+    function addEventHandle() {
+      //若直接用$('number').value得到的是一个字符串，两个字符串相加则为连接字符串。
+      //所以要先用Number()专为数值类型。
+      var num1 = Number($('number1').value);
+      var num2 = Number($('number2').value);
+      var result = add(num1, num2);
+      renderResult(result);
+    }
+
+    function initEvent(){
+      $('addbtn').addEventListener('click',addEventHandle,false);
+    }
+
+    initEvent();
+  </script>
+</body>
+
+</html>
