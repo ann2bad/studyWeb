@@ -1,0 +1,121 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>IFE JavaScript Task 01</title>
+</head>
+
+<body>
+
+  <ul id="source">
+    <li>北京空气质量：<b>90</b></li>
+    <li>上海空气质量：<b>70</b></li>
+    <li>天津空气质量：<b>80</b></li>
+    <li>广州空气质量：<b>50</b></li>
+    <li>深圳空气质量：<b>40</b></li>
+    <li>福州空气质量：<b>32</b></li>
+    <li>成都空气质量：<b>90</b></li>
+  </ul>
+
+  <ul id="resort">
+    <!-- 
+    <li>第一名：北京空气质量：<b>90</b></li>
+    <li>第二名：北京空气质量：<b>90</b></li>
+    <li>第三名：北京空气质量：<b>90</b></li>
+     -->
+
+  </ul>
+
+  <button id="sort-btn">排序</button>
+
+  <script type="text/javascript">
+    //根据选择器选择元素并返回第一个
+    var $ = selector => document.querySelector(selector);
+
+    // 给一个element绑定一个针对event事件的响应，响应函数为listener
+    $.on = (element, event, listener) => element.addEventListener(event, listener);
+    
+    var numChn = ['一','二','三','四','五','六','七','八','九','十'];
+    //根据文本和数值创建Li标签
+    function makeLi(no, city, num) {
+      var eleLi = document.createElement('li');
+      eleLi.innerHTML = '第'+numChn[no]+'名：'+ city + '空气质量：<b>' + num + '</b>';
+      return eleLi;
+    }
+    /**
+     * getData方法
+     * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
+     * 返回一个数组，格式见函数中示例
+     */
+    function getData() {
+      /*
+      coding here
+      */
+      var sourceEle = $('#source');
+      var eleList = sourceEle.getElementsByTagName('li');
+      var data = new Array();
+      for (var i = 0; i < eleList.length; i++) {
+        var item = new Array();
+        var str = eleList[i].innerText;
+        var temp = str.split('空气质量：')
+        item[0] = temp[0];
+        item[1] = parseInt(temp[1]);
+        data.push(item);
+      }
+      /*
+      data = [
+        ["北京", 90],
+        ["北京", 90]
+        ……
+      ]
+      */
+
+      return data;
+
+    }
+
+    /**
+     * sortAqiData
+     * 按空气质量对data进行从小到大的排序
+     * 返回一个排序后的数组
+     */
+    function sortAqiData(data) {
+      //var sorted = new Array();
+      data.sort((a, b) => a[1] - b[1]);
+      return data;
+
+    }
+
+    /**
+     * render
+     * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
+     * 格式见ul中的注释的部分
+     */
+    function render(data) {
+      var rstUl = $('#resort');
+      for(var i=0;i<data.length;i++){
+        var tempLi=makeLi(i,data[i][0],data[i][1]);
+        rstUl.appendChild(tempLi);
+      }
+    }
+
+    function btnHandle() {
+      var aqiData = getData();
+      aqiData = sortAqiData(aqiData);
+      render(aqiData);
+    }
+
+
+    function init() {
+      // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
+      var btn = $('#sort-btn');
+      $.on(btn,'click',btnHandle);
+    }
+
+    init();
+
+  </script>
+</body>
+
+</html>
